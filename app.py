@@ -1,9 +1,14 @@
+from FileWrite import FileWrite
+
 from flask import Flask, request, render_template, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import SocketIO, Namespace
 from flask_session import Session
 from config import ProductionConfig, DevelopmentConfig, TestingConfig
 from functools import wraps
+
+from auth.auth import auth_bp, AuthNamespace
+
 
 app = Flask(__name__)
 app.config.from_object(DevelopmentConfig)
@@ -12,20 +17,7 @@ Session(app)
 db = SQLAlchemy(app)
 socketio = SocketIO(app)
 
-
-class AuthorizationNamespace(Namespace):
-    @staticmethod
-    def on_connect():
-        print("[AUTH] Client connected.")
-
-    @staticmethod
-    def on_disconnect():
-        print("[AUTH] Client disconnected.")
-
-    @staticmethod
-    def on_authenticate(data):
-        print("[AUTH] Client authenticated.")
-        print(f"[AUTH] {data}")
+app.register_blueprint(auth_bp, url_prefix="/")
 
 
 class RoomNamespace(Namespace):
@@ -69,21 +61,6 @@ def index():
     return render_template("index.html", username=username, password=password)
 
 
-@app.route("/login", methods=["GET", "POST"])
-def login():
-    if request.method == "GET":
-        return render_template("login.html")
-
-    if request.method == "POST":
-        username = request.form["username"].strip()
-        password = request.form["password"].strip()
-
-        session["username"] = username
-        session["password"] = password
-
-        return redirect("/")
-
-
 @socketio.on("connect")
 def client_connect():
     print("Client connected!")
@@ -100,9 +77,10 @@ def handle_message(msg):
     socketio.send(msg, broadcast=True)
 
 
-socketio.on_namespace(AuthorizationNamespace("/auth"))
+socketio.on_namespace(AuthNamespace("/auth"))
 socketio.on_namespace(RoomNamespace("/chat-room"))
 socketio.on_namespace(DirectMessageNamespace("/chat-direct"))
 
 if __name__ == '__main__':
-    socketio.run(app, debug=True)
+    FileWrite.clear()
+    socketio.run(app, host="0.0.0.0")

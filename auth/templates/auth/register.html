@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Chat App: Register</title>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" crossorigin="anonymous"></script>
+        <script src="/auth/static/register.js"></script>
+    </head>
+    <body>
+        <h1>Register Page</h1>
+        <form action="/register" method="POST">
+            <div>
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text">
+            </div>
+
+            <div>
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password">
+            </div>
+
+            <div>
+                <label for="confirm_password">Confirm Password</label>
+                <input id="confirm_password" name="confirm_password" type="password">
+            </div>
+
+            <button id="registerSubmit" type="submit">Register</button>
+        </form>
+    </body>
+</html>

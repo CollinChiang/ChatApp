@@ -1,4 +1,4 @@
-const URL = "http://127.0.0.1:5000";
+const URL = "https://chatapp.collinchiang.repl.co";
 
 document.addEventListener("DOMContentLoaded", ()=>{
     var mainSocket = io.connect(URL);
@@ -9,9 +9,5 @@ document.addEventListener("DOMContentLoaded", ()=>{
     
     mainSocket.on("message", function(msg) {
         console.log("Received Message (Client)");
-    });
-
-    document.getElementById("sendLogin").addEventListener("click", function() {
-        console.log("CLICKED!");
     });
 });

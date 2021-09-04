@@ -4,17 +4,19 @@
         <meta charset="UTF-8">
         <title>Chat App: Login Page</title>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" crossorigin="anonymous"></script>
-        <script src="/static/login.js"></script>
+        <script src="/auth/static/login.js"></script>
     </head>
     <body>
         <h1>Login Page</h1>
         <form action="/login" method="POST">
             <div>
-                <input name="username" type="text" placeholder="Username:">
+                <label for="username">Username</label>
+                <input id="username" name="username" type="text">
             </div>
 
             <div>
-                <input name="password" type="password" placeholder="Password:">
+                <label for="password">Password</label>
+                <input id="password" name="password" type="password">
             </div>
 
             <button id="loginSubmit" type="submit">Submit</button>

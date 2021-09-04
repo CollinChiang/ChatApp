@@ -1,6 +1,7 @@
 class Config(object):
     SECRET_KEY = b"\xd2\xeb\x82K+p\xc5\xec9\xf9\x9af<\xd0\xb3\x10\x0f\x87=\xab\xb3M;\xa6"
 
+    SESSION_COOKIE_PATH = "/"
     SESSION_PERMANENT = False
     SESSION_TYPE = "filesystem"
 

@@ -1,0 +1,7 @@
+[AUTH] Client NeqBKvgQg2iNZpj6AAAD connected.
+[AUTH] Client NeqBKvgQg2iNZpj6AAAD authenticated. With {'page': 'login.html'}.
+[AUTH] Client NeqBKvgQg2iNZpj6AAAD disconnected.
+[AUTH] Client GaBWAtgZTox4nXFmAAAH connected.
+[AUTH] Client GaBWAtgZTox4nXFmAAAH disconnected.
+[AUTH] Client t7UCUhNGfQqLKWAGAAAJ connected.
+[AUTH] Client t7UCUhNGfQqLKWAGAAAJ disconnected.
