@@ -30,6 +30,7 @@ class AuthorizationNamespace(Namespace):
 
 class RoomNamespace(Namespace):
     def on_connect(self):
+
         pass
 
     def on_disconnect(self):
