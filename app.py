@@ -5,9 +5,11 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_socketio import SocketIO, Namespace
 from flask_session import Session
 from config import ProductionConfig, DevelopmentConfig, TestingConfig
-from functools import wraps
+from utils.login_required import login_required
 
+from api.api import api_bp
 from auth.auth import auth_bp, AuthNamespace
+from room.room import room_bp, RoomNamespace
 
 
 app = Flask(__name__)
@@ -17,39 +19,9 @@ Session(app)
 db = SQLAlchemy(app)
 socketio = SocketIO(app)
 
+app.register_blueprint(api_bp, url_prefix="/api")
 app.register_blueprint(auth_bp, url_prefix="/")
-
-
-class RoomNamespace(Namespace):
-    def on_connect(self):
-
-        pass
-
-    def on_disconnect(self):
-        pass
-
-    def on_message(self):
-        pass
-
-
-class DirectMessageNamespace(Namespace):
-    def on_connect(self):
-        pass
-
-    def on_disconnect(self):
-        pass
-
-    def on_message(self):
-        pass
-
-
-def login_required(function):
-    @wraps(function)
-    def decorated_function(*args, **kwargs):
-        if session.get("username") is None:  # TODO TEMPORARY
-            return redirect("/login")
-        return function(*args, **kwargs)
-    return decorated_function
+app.register_blueprint(room_bp, url_prefix="/room")
 
 
 @app.route("/")
@@ -78,8 +50,7 @@ def handle_message(msg):
 
 
 socketio.on_namespace(AuthNamespace("/auth"))
-socketio.on_namespace(RoomNamespace("/chat-room"))
-socketio.on_namespace(DirectMessageNamespace("/chat-direct"))
+socketio.on_namespace(RoomNamespace("/room"))
 
 if __name__ == '__main__':
     FileWrite.clear()

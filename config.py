@@ -13,9 +13,7 @@ class ProductionConfig(Config):
     TESTING = False
 
     DB_NAME = "production-db"
-    DB_USERNAME = ""
-    DB_PASSWORD = ""
-    SQLALCHEMY_DATABASE_URI = None  # TODO create production database
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///database/{DB_NAME}.db"
 
     SESSION_COOKIE_SECURE = True
 
@@ -25,9 +23,7 @@ class DevelopmentConfig(Config):
     TESTING = False
 
     DB_NAME = "development-db"
-    DB_USERNAME = ""
-    DB_PASSWORD = ""
-    SQLALCHEMY_DATABASE_URI = None  # TODO create development database
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///database/{DB_NAME}.db"
 
     SESSION_COOKIE_SECURE = False
 
@@ -37,8 +33,6 @@ class TestingConfig(Config):
     TESTING = True
 
     DB_NAME = "development-db"
-    DB_USERNAME = ""
-    DB_PASSWORD = ""
-    SQLALCHEMY_DATABASE_URI = None  # TODO create testing database
+    SQLALCHEMY_DATABASE_URI = f"sqlite:///database/{DB_NAME}.db"
 
     SESSION_COOKIE_SECURE = False
