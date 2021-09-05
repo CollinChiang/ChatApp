@@ -1,4 +1,7 @@
-from app import db
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+
+db = SQLAlchemy()
 
 
 class User(db.Model):
@@ -14,19 +17,21 @@ class User(db.Model):
     )
 
     password = db.Column(
-        db.String(64), 
+        db.String(102), 
         nullable=False
     )
 
+    """
     email = db.Column(
         db.Text, 
         unique=True, 
         nullable=False
     )
+    """
 
     created_by = db.Column(
         db.DateTime, 
-        nullable=False
+        default=datetime.now
     )
 
 
@@ -49,7 +54,7 @@ class Server(db.Model):
 
     created_by = db.Column(
         db.DateTime, 
-        nullable=False
+        default=datetime.now
     )
 
 
@@ -71,7 +76,7 @@ class Channel(db.Model):
 
     created_by = db.Column(
         db.DateTime, 
-        nullable=False
+        default=datetime.now
     )
 
 
@@ -101,7 +106,7 @@ class Message(db.Model):
 
     created_by = db.Column(
         db.DateTime, 
-        nullable=False
+        default=datetime.now
     )
 
 
